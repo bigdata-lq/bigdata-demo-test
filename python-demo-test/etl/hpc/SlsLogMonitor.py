@@ -5,9 +5,9 @@ import requests
 
 
 # sls
-endpoint = 'cn-hangzhou-intranet.log.aliyuncs.com'
-accessKeyId = 'LTAI6QBLDJI5tFkd'
-accessKey = 'Fw50Y0iqS6MDY4A1MXhhL6wjBYhssl'
+endpoint = ''
+accessKeyId = ''
+accessKey = ''
 
 client = LogClient(endpoint, accessKeyId, accessKey)
 
