@@ -17,3 +17,4 @@ metastore_db/
 /flink-demo-test/target/
 /java-demo-test/target/
 /spark-demo-test/target/!/.idea/
+!/.idea/
