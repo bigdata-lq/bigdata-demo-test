@@ -1,0 +1,6 @@
+test_case
+#test_recharge_and_place_order
+#test_select_his
+#test_select_real
+#test_register
+#test_demo

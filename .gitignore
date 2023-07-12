@@ -1,0 +1,19 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+/derby.log
+!/derby.log
+derby.log
+metastore_db/
+!/.idea/
+
+# Project exclude paths
+/flink-demo-test/target/
+/java-demo-test/target/
+/spark-demo-test/target/!/.idea/

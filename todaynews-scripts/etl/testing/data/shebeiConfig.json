@@ -1,0 +1,37 @@
+{
+  "extended_update_success": {
+    "request_url": "/admin/extended/update",
+    "comment": "新增扩展字段",
+    "type": "post",
+    "data_use_case": {
+      "param_object": {
+        "name": "test_item_id",
+        "business": "测试商品id"
+      },
+      "code": 200,
+      "message": "新增成功"
+    }
+  },
+  "extended_update_error": {
+    "request_url": "/admin/extended/update",
+    "comment": "新增扩展字段",
+    "type": "post",
+    "data_use_case": {
+      "param_object": {},
+      "code": 500,
+      "message": "参数错误"
+    }
+  },
+  "extended_search_sucess": {
+    "request_url": "/admin/extended/list",
+    "comment": "查询扩展字段",
+    "type": "get",
+    "data_use_case": {
+      "param_object": {
+        "name": "item"
+      },
+      "code": 200,
+      "message": "查询成功"
+    }
+  }
+}
