@@ -18,3 +18,4 @@ metastore_db/
 /java-demo-test/target/
 /spark-demo-test/target/!/.idea/
 !/.idea/
+!/.idea/

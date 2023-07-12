@@ -1,0 +1,28 @@
+{
+  "app_user_login": {
+    "url": "https://gateway.bibo18.com/usercenter/app/user/login",
+    "param": {
+      "phone": "18358521853",
+      "Code": "1234"
+    },
+    "expect_result": "ok",
+    "status_code": 200
+  },
+  "app_user_sendCaptcha": {
+    "url": "https://gateway.bibo18.com/usercenter/common/sms/sendCaptcha",
+    "param": {
+      "phone": "18358521853"
+    },
+    "expect_result": "ok",
+    "status_code": 2008
+  },
+  "app_pankoService_historicalTrend": {
+    "url": "http://gateway.bibo18.com/pankoService/app/historicalTrend",
+    "param": {
+      "requestId": "",
+      "type": 1
+    },
+    "expect_result": "ok",
+    "status_code": 200
+  }
+}

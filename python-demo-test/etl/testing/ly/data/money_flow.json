@@ -1,0 +1,19 @@
+{
+  "jj_001": {
+    "url": "https://gateway.bibo18.com/pankoService/app/fundFlow/mriTradeMin",
+    "param": {},
+    "expect_result": "ok",
+    "status_code": 200,
+    "name": "流入分时"
+  },
+  "jj_002": {
+    "url": "https://gateway.bibo18.com/tickService/app/timeShare/listTimeShare",
+    "param": {
+      "prodCode": "000001",
+      "prodType": "MRI"
+    },
+    "expect_result": "ok",
+    "status_code": 200,
+    "name": "查询最新一条分时数据"
+  }
+}

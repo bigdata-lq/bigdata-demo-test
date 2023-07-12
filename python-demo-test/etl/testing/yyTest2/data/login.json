@@ -1,0 +1,7 @@
+{
+  "url": "https://gateway.bibo18.com/usercenter/app/user/login",
+  "phone": "18358521853",
+  "Code": "1234",
+  "expect_result": "ok",
+  "status_code": 200
+}
