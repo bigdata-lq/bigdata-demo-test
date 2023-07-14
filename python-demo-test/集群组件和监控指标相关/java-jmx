@@ -1,0 +1,22 @@
+#开启jmx
+-Xloggc:/alidata/log/hadoop-hdfs/gc.log
+-XX:NewRatio=2
+-XX:+PrintGCDetails
+-XX:+PrintClassHistogramBeforeFullGC
+-XX:+PrintClassHistogramAfterFullGC
+-XX:+PrintGCApplicationStoppedTime
+-XX:+PrintHeapAtGC -XX:+UseParNewGC
+-XX:+UseConcMarkSweepGC
+-XX:CMSInitiatingOccupancyFraction=70
+-XX:+CMSParallelRemarkEnabled
+-XX:+UseGCLogFileRotation
+-XX:NumberOfGCLogFiles=50
+-XX:GCLogFileSize=400M
+-XX:+PrintGCDateStamps
+-javaagent:/alidata/hadoopPro/jmx_prometheus_javaagent-0.13.0.jar=7000:/alidata/hadoopPro/datanode.yml
+
+
+##idc node_exporter 采集
+## node_exporter-1.3.0.linux-amd64 版本  node_exporter-1.3.0.linux-amd64
+## 启动方式如下：
+nohup /usr/local/services/prometheus_exporters/node_exporter-1.3.0.linux-amd64/node_exporter  --web.listen-address=":9101" &

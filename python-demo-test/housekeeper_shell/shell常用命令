@@ -1,0 +1,119 @@
+
+进程相关
+	## 查看进程所占用端口号
+	netstat -anop|grep pid
+	## 查看端口号被占用
+	netstat -tunlp|grep 4040
+	netstat -apn |grep 60020
+
+	## 查看该盘有多少进程在使用
+	sudo fuser -mv /dev/sdl
+
+	## umount /data（卸载硬盘已挂载的data目录）
+    ## mount /dev/vdb1 /usr（挂载到usr目录）
+
+	## 查看磁盘读写过高
+	查看进程占用磁盘过高
+	yum install sysstat
+	iotop或sudo pidstat -d 3
+
+	#进程占用CPU排序 top5：
+	pidstat -u | sort -k 8 -r
+	pidstat |tail -n  1000 |awk '{print $1 " " $4 " "  $8}' |sort -rn  -k  3|head 100
+
+	#进程占用内存
+	# pidstat -r
+	#进程占用上下文切换
+	# pidstat -wt
+	## 进程占用io
+	# pidstat -d
+
+	#进程占用线程情况
+	## pidstat -t -p 17700
+
+磁盘相关
+	#查看磁盘占用过高
+	iostat
+	#当前文件大小
+	du -sh ./*
+	## 当前目录占用空间最大的TOP10目录
+	du -hsx * | sort -r | head -10
+
+
+查看日志关键信息
+	## 查看错误日志关键信息前多少行
+	cat -n xxx.log | grep 'ERROR' -B100
+    cat -n xxx.log | grep 'ERROR' -A100
+
+	## 根据时间日期查看日志
+	sed -n '/2022-04-25 17:16:09,053/,/2022-04-25 17:16:09,061/p'  hdfs-audit.log
+
+	tail -n 500 hdfs-audit.log
+	tailf hdfs-audit.log
+
+
+其他
+	##修改软连接
+		ln -snf /opt/cloudera/parcels/CDH-5.13.2-1.cdh5.13.2.p0.3/lib/hadoop/etc/hadoop /etc/hadoop/conf.cloudera.hdfs2
+		ln -snf /opt/cloudera/parcels/CDH-5.13.2-1.cdh5.13.2.p0.3/lib/hadoop/etc/hadoop /etc/hadoop/conf
+
+	##查看脚本命令地址
+	which hdfs
+
+	## 查看当前目录下是否包含该字符串
+	grep -rn "1000m" *
+	find promHadoop -type f|xargs grep "ads_core_table_on_time_d" ## promHadoop目录下的文件含有改字符串
+
+	##查看进程耗memory 前3
+	ps aux|head -1;ps aux|grep -v PID|sort -rn -k +4|head -n 3
+
+	##查看进程耗cpu 前3
+	ps aux|head -1;ps aux|grep -v PID|sort -rn -k +3|head -n 3
+
+
+	## 删除yarn日志目录
+	find . -name "application*" | xargs rm -rf 'application*'
+
+
+
+	## 生成秘钥
+	ssh-keygen -t rsa
+	私钥 id_rsa和公钥id_rsa.pub
+	cat ~/.ssh/id_rsa.pub
+    vi ~/.ssh/authorized_keys
+arthas
+
+	## 查看进程相关信息
+	java -jar arthas-boot.jar  (注意权限问题) 权限组
+	## 查看jvm/线程情况
+	dasboard
+	## 查看线上类代码是否部署成功
+	jad 全路径.类名
+	## 监控类返回结果
+	watch命令+类全路径+方法名+想要监控的参数
+
+	## 热部署
+	redefine /root/java/HelloController.class
+
+	## 火焰图 (图像/html)
+	profiler start
+	profiler status
+	profiler stop
+	profiler stop --format html
+
+
+	## 内存
+	heapdump
+	heapdump --live /tmp/dump.hprof
+
+jmap命令
+	jmap -dump:format=b,file=heap.hprof pid
+	##抓取当前活跃的
+	 jmap -dump:live,file=icpMemery20180601.dump 26087
+	## 查看内存占用最多对象
+	jmap -histo 27220|sort -k 3 -g -r|less
+
+jstack命令
+top -Hp 进程ID ## 查看该进程较高的线程
+printf "%x\n" 82303 ## 线程id转化为十进制ID
+jstack -l 37 | grep 1417f -a50  #查看该进程的堆栈信息并过滤出该进程ID
