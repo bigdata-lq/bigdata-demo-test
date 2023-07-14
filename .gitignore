@@ -19,3 +19,5 @@ metastore_db/
 /spark-demo-test/target/!/.idea/
 !/.idea/
 !/.idea/
+/.idea/
+!/.idea/
