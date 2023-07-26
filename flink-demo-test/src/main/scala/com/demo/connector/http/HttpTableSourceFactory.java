@@ -26,7 +26,8 @@ import java.util.Set;
  */
 public class HttpTableSourceFactory implements DynamicTableSourceFactory {
 
-    /**
+    /**CDCJsonDeserializationSchema
+     YtCDCFormatFactory
      * Request Config
      */
     private static final ConfigOption<String> HTTP_CLIENT_HEADERS =

@@ -15,7 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <flink.version>1.12.2</flink.version>
+        <flink.version>1.13.3</flink.version>
         <scala.binary.version>2.11</scala.binary.version>
         <scala.version>2.11.12</scala.version>
         <httpclient.version>4.5.6</httpclient.version>
@@ -99,6 +99,12 @@
             <artifactId>flink-connector-kafka_${scala.binary.version}</artifactId>
             <version>${flink.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-json</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
         <!-- flink aliyun log -->
 <!--        <dependency>-->
 <!--            <groupId>com.aliyun.openservices</groupId>-->
@@ -137,7 +143,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- 时间解析工具 -->
@@ -199,6 +204,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.yangt.model</groupId>
+            <artifactId>yt_data_type</artifactId>
+            <version>1.0.5</version>
+        </dependency>
     </dependencies>
 
     <profiles>

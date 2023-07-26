@@ -1,1 +1,2 @@
 com.demo.connector.http.HttpTableSourceFactory
+com.demo.format.YtCDCFormatFactory
