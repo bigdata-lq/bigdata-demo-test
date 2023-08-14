@@ -209,6 +209,13 @@
             <artifactId>yt_data_type</artifactId>
             <version>1.0.5</version>
         </dependency>
+
+        <!-- redis connector包 -->
+        <dependency>
+            <groupId>com.yangt</groupId>
+            <artifactId>yt-flink-common</artifactId>
+            <version>1.0.3-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <profiles>
