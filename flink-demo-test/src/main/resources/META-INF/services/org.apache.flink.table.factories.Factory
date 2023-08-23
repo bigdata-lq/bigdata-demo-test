@@ -1,3 +1,4 @@
 com.demo.connector.http.HttpTableSourceFactory
 com.demo.format.YtCDCFormatFactory
 com.demo.connector.redis.RedisDynamicTableFactory
+com.demo.connector.kafka.MetricsKafkaDynamicTableFactory
