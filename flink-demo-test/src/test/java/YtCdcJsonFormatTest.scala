@@ -79,7 +79,7 @@ class YtCdcJsonFormatTest {
         |  'connector' = 'kafka',
         |  'topic' = 'canal_yt_trade_pt_order_shop',
         |  'properties.bootstrap.servers' = '172.16.30.164:9092,172.16.30.165:9092,172.16.30.166:9092,172.16.30.167:9092',
-        |  'properties.group.id' = 'local.flink.order_trade.test.1',
+        |  'properties.group.id' = 'local.flink.order_trade.test.2',
         |  'format' = 'yt-cdc'
         |)
         |
