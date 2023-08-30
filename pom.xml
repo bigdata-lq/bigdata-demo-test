@@ -12,6 +12,7 @@
         <module>java-demo-test</module>
         <module>spark-demo-test</module>
         <module>flink-demo-test</module>
+        <module>java-springboot-test</module>
     </modules>
 
     <properties>

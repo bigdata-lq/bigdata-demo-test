@@ -12,7 +12,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 331645245830355567L;
 
-    @TableId(type = IdType.ASSIGN_ID)
+    @TableId(type = IdType.AUTO)
     private Long id;
     /**
      * 用户名称

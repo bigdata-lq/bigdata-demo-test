@@ -13,10 +13,10 @@ derby.log
 metastore_db/
 !/.idea/
 
-# Project exclude paths
+
 /flink-demo-test/target/
 /java-demo-test/target/
-/spark-demo-test/target/
+/spark-demo-test/target/*
 /spark-demo-test/target/!/.idea/
 !/.idea/
 !/.idea/

@@ -17,8 +17,8 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         log.info("start insert fill.....");
         // setFieldValByName(String fieldName, Object fieldVal, MetaObject metaObject
-        this.setFieldValByName("gmt_create", new Date(), metaObject);
-        this.setFieldValByName("gmt_modified", new Date(), metaObject);
+        this.setFieldValByName("gmtCreate", new Date(), metaObject);
+        this.setFieldValByName("gmtModified", new Date(), metaObject);
     }
 
     /**
@@ -27,6 +27,6 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("start update fill.....");
-        this.setFieldValByName("gmt_modified", new Date(), metaObject);
+        this.setFieldValByName("gmtModified", new Date(), metaObject);
     }
 }

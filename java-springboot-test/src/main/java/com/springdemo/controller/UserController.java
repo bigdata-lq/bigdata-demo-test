@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.springdemo.entity.User;
+import com.springdemo.hander.limit.AccessLimit;
 import com.springdemo.service.UserService;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,7 @@ public class UserController {
      * @return 单条数据
      */
     @GetMapping("{id}")
+    @AccessLimit
     public ResponseEntity selectOne(@PathVariable("id") Integer id) {
         return ResponseEntity.ok().body(userService.getById(id));
     }
