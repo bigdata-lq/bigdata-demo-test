@@ -7,7 +7,12 @@ import com.springdemo.entity.User;
 import com.springdemo.hander.limit.AccessLimit;
 import com.springdemo.service.UserService;
 import org.apache.ibatis.annotations.Delete;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,11 +23,45 @@ import java.util.Map;
 @RestController
 @RequestMapping("user")
 public class UserController {
+
+    @Autowired
+    @Qualifier("redisCacheManager")
+    private CacheManager redisCacheManager;
+
+    @Autowired
+    @Qualifier("ehUserCache")
+    private org.ehcache.Cache<String, Object> ehUserCache;
     /**
      * 服务对象
      */
     @Resource
     private UserService userService;
+
+    @GetMapping("cacheTest/{id}")
+    public ResponseEntity cacheTest(@PathVariable("id") Integer id) {
+        //先从redis中取
+        Collection<String> cacheNames = redisCacheManager.getCacheNames();
+        cacheNames.forEach(name -> System.out.println("name = " + name));
+
+        Cache cache = redisCacheManager.getCache("redis_user_cache");
+        Cache.ValueWrapper valueWrapper = cache.get("userId-" + id);
+        if (valueWrapper != null && valueWrapper.get() != null) {
+            return ResponseEntity.ok().body((User)valueWrapper.get()) ;
+        }
+
+        // 从二级缓存中取
+        if(ehUserCache.get("userId-" + id) != null){
+            return ResponseEntity.ok().body((User)ehUserCache.get("userId-" + id)) ;
+        }
+
+        // 数据库查
+        User user = userService.getById(id);
+        // 缓存双写
+        cache.put("userId-" + id, user);
+        ehUserCache.put("userId-" + id, user);
+
+        return ResponseEntity.ok().body(user);
+    }
 
     /**
      * 通过主键查询单条数据
@@ -81,7 +120,7 @@ public class UserController {
      * @return 实例对象
      */
     @PostMapping
-    public ResponseEntity save(User user) {
+    public ResponseEntity save(@Validated User user) {
         boolean save = userService.saveBatch(Arrays.asList(user));
         return ResponseEntity.ok().body(save);
     }

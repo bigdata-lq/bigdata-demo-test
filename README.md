@@ -21,11 +21,16 @@
 
 # java-springboot-test
 
-1.springboot集成mybatis-plus&自动填充&swagger
+1.springboot集成mybatis-plus&自动填充&swagger&乐观锁
 
 2.redis实现api接口限流
 
 3.全局异常处理
+
+4.ehcache3 、 redis双缓存
+
+5.validation校验 
+
 
 # spark-demo-test
 1.spark bitmap test

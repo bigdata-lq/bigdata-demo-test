@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,6 +19,7 @@ public class User implements Serializable {
     /**
      * 用户名称
      */
+    @NotNull(message = "用户名不能为空")
     private String name;
     /**
      * 账号
@@ -25,6 +28,7 @@ public class User implements Serializable {
     /**
      * 外号-诨名
      */
+    @NotNull(message = "外号-诨名不能为空")
     private String nickName;
     /**
      * 星宿
@@ -33,6 +37,7 @@ public class User implements Serializable {
     /**
      * 年龄
      */
+    @Max(value = 99, message = "不能大于200岁")
     private Integer age;
     /**
      * 性别

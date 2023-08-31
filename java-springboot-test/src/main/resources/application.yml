@@ -7,6 +7,14 @@ server:
 logging:
   config: classpath:log4j2-spring.xml
 
+#本地缓存配置
+cache:
+  ehcache:
+    heap: 1000
+    offheap: 200
+    disk: 500
+    diskDir: local/cache/
+
 spring:
   redis:
     database: 8 # Redis数据库索引（默认为0）

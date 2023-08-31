@@ -6,13 +6,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.time.Duration;
+
+
 @Configuration
-@EnableCaching
+//@EnableCaching
 public class RedisConfig {
     /**
      * RedisTemplate相关配置
@@ -39,4 +46,20 @@ public class RedisConfig {
         template.setValueSerializer(jackson2JsonRedisSerializer);
         return template;
     }
+
+    /**
+     * 序列化缓存定制
+     * @param factory
+     * @return
+     */
+    @Bean("redisCacheManager")
+    public RedisCacheManager jsonCacheManager(RedisConnectionFactory factory) {
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                .serializeValuesWith(RedisSerializationContext.SerializationPair
+                        .fromSerializer(new GenericJackson2JsonRedisSerializer()))
+                .entryTtl(Duration.ofMinutes(10)); //10分钟
+
+        return RedisCacheManager.builder(factory).cacheDefaults(config).build();
+    }
+
 }
