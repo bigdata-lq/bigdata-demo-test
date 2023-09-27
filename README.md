@@ -11,6 +11,8 @@
 
 6.flink-kafka-metrics 新增lag延迟指标上报
 
+7. java api YarnClusterDescriptor 提交 flink任务
+
 
 # java-demo-test
 1.java 多线程 读写锁 synchronized
@@ -43,6 +45,8 @@
 
 5.spark 小文件合并 支持 parquet/orc/rc 
 set spark.sql.sources.commitProtocolClass=com.demo.compaction.CompactFilesCommitProtocol
+
+6.java api sparkLaucher 提交 spark 任务
 
 # python-demo-test
 1.多线程爬取【百思不得姐】网站的文字和图片并下载到csv文件中

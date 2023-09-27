@@ -124,6 +124,13 @@
             <version>8.0.16</version>
         </dependency>
 
+        <!-- java api 提交flink 任务依赖 -->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-yarn_${scala.binary.version}</artifactId>
+            <version>${flink.version}</version>
+        </dependency>
+
         <!-- Add logging framework, to produce console output when running in the IDE. -->
         <!-- These dependencies are excluded from the application JAR by default. -->
         <dependency>
