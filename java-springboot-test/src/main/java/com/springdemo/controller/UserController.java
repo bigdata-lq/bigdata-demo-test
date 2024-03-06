@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,14 @@ public class UserController {
      */
     @Resource
     private UserService userService;
+
+
+    @RequestMapping("/getCurrentUser")
+    //authentication 认证
+    public Object getCurrentUser(Authentication authentication) {
+        return authentication.getPrincipal();
+    }
+
 
     @GetMapping("cacheTest/{id}")
     public ResponseEntity cacheTest(@PathVariable("id") Integer id) {

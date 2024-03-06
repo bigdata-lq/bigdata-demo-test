@@ -3,14 +3,18 @@ package com.springdemo.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
-public class User implements Serializable {
+public class User implements UserDetails,Serializable {
 
     private static final long serialVersionUID = 331645245830355567L;
 
@@ -72,4 +76,60 @@ public class User implements Serializable {
      */
     @Version
     private Integer version;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**
+     * 授权
+     */
+    private List<GrantedAuthority> authorities;
+
+    public User() {
+    }
+
+    public User(String name, String password, List<GrantedAuthority> authorities) {
+        this.name = name;
+        this.password = password;
+        this.authorities = authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return name;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

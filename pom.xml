@@ -13,6 +13,8 @@
         <module>spark-demo-test</module>
         <module>flink-demo-test</module>
         <module>java-springboot-test</module>
+        <module>udf-demo-test</module>
+        <module>antlr4-demo-test</module>
     </modules>
 
     <properties>

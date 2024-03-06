@@ -211,11 +211,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.yangt.model</groupId>
-            <artifactId>yt_data_type</artifactId>
-            <version>1.0.5</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.yangt.model</groupId>-->
+<!--            <artifactId>yt_data_type</artifactId>-->
+<!--            <version>1.0.5</version>-->
+<!--        </dependency>-->
 
         <!-- redis connector包 -->
         <dependency>

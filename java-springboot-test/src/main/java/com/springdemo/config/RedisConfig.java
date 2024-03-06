@@ -3,6 +3,7 @@ package com.springdemo.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,8 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import java.time.Duration;
 
@@ -21,6 +24,10 @@ import java.time.Duration;
 @Configuration
 //@EnableCaching
 public class RedisConfig {
+
+    @Autowired
+    private  RedisConnectionFactory redisConnectionFactory;
+
     /**
      * RedisTemplate相关配置
      * 使redis支持插入对象
@@ -61,5 +68,19 @@ public class RedisConfig {
 
         return RedisCacheManager.builder(factory).cacheDefaults(config).build();
     }
+
+    /**
+     * TokenStore会自动连接redis，将token存储到redis中
+     *
+     * @return org.springframework.security.oauth2.provider.token.TokenStore
+     */
+
+    @Bean
+    public TokenStore redisTokenStore() {
+        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+        redisTokenStore.setPrefix("token:");
+        return redisTokenStore;
+    }
+
 
 }

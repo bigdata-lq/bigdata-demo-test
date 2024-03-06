@@ -2,8 +2,8 @@ package com.demo.format;
 
 import com.alibaba.fastjson.JSONObject;
 import com.demo.utils.MysqlDateType;
-import com.yangt.model.canal.DataMessage;
-import com.yangt.model.canal.Field;
+//import com.yangt.model.canal.DataMessage;
+//import com.yangt.model.canal.Field;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
@@ -45,8 +45,9 @@ public class CDCJsonDeserializationSchema implements DeserializationSchema<RowDa
 
     @Override
     public void deserialize(byte[] message, Collector<RowData> out) throws IOException {
-        DataMessage dataMessage = JSONObject.parseObject(new String(message), DataMessage.class);
-        JSONObject jsonObject = changeDataMessage(dataMessage);
+//        DataMessage dataMessage = JSONObject.parseObject(new String(message), DataMessage.class);
+//        JSONObject jsonObject = changeDataMessage(dataMessage);
+        JSONObject jsonObject = new JSONObject();
         Row row = new Row(RowKind.INSERT, rowType.getFieldCount());
 //        GenericRowData insert = new GenericRowData(rowType.getFieldCount());
 //        for(String fieldName : rowType.getFieldNames()){
@@ -76,35 +77,35 @@ public class CDCJsonDeserializationSchema implements DeserializationSchema<RowDa
         return this.resultTypeInfo;
     }
 
-    private static JSONObject changeDataMessage(DataMessage dataMessage){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("_execute_time", dataMessage.getExecuteTime());
-        jsonObject.put("_table_name", dataMessage.getTableName());
-        jsonObject.put("_db_name", dataMessage.getDbName());
-        jsonObject.put("_op_type", dataMessage.getOpType());
-        jsonObject.put("_change_column", list2JsonString(dataMessage.getChangeColumn()));
-        jsonObject.put("_old_column", list2JsonString(dataMessage.getOldColumn()));
-        jsonObject.put("_ddl_field", list2JsonString(dataMessage.getDdlField()));
-        for (Field field : dataMessage.getNewColumn()) {
-            if(MysqlDateType.isNumberType(field.getType().toLowerCase()) && field.isValueNull()){
-                jsonObject.put(field.getFieldName(), null);
-            } else {
-                jsonObject.put(field.getFieldName(), field.getValue());
-            }
-        }
-        return jsonObject;
-    }
+//    private static JSONObject changeDataMessage(DataMessage dataMessage){
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("_execute_time", dataMessage.getExecuteTime());
+//        jsonObject.put("_table_name", dataMessage.getTableName());
+//        jsonObject.put("_db_name", dataMessage.getDbName());
+//        jsonObject.put("_op_type", dataMessage.getOpType());
+//        jsonObject.put("_change_column", list2JsonString(dataMessage.getChangeColumn()));
+//        jsonObject.put("_old_column", list2JsonString(dataMessage.getOldColumn()));
+//        jsonObject.put("_ddl_field", list2JsonString(dataMessage.getDdlField()));
+//        for (Field field : dataMessage.getNewColumn()) {
+//            if(MysqlDateType.isNumberType(field.getType().toLowerCase()) && field.isValueNull()){
+//                jsonObject.put(field.getFieldName(), null);
+//            } else {
+//                jsonObject.put(field.getFieldName(), field.getValue());
+//            }
+//        }
+//        return jsonObject;
+//    }
 
-    private static String list2JsonString(List<Field> fields){
-        final JSONObject jsonObject = new JSONObject();
-        if(CollectionUtils.isEmpty(fields)){
-            return jsonObject.toString();
-        }
-        for (Field field : fields) {
-            jsonObject.put(field.getFieldName(), field.getValue());
-        }
-        return jsonObject.toString();
-    }
+//    private static String list2JsonString(List<Field> fields){
+//        final JSONObject jsonObject = new JSONObject();
+//        if(CollectionUtils.isEmpty(fields)){
+//            return jsonObject.toString();
+//        }
+//        for (Field field : fields) {
+//            jsonObject.put(field.getFieldName(), field.getValue());
+//        }
+//        return jsonObject.toString();
+//    }
 
     private static Object parse(LogicalTypeRoot root, String value) {
         if(StringUtils.isBlank(value)){
